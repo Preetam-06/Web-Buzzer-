@@ -1,0 +1,46 @@
+{
+  "r_ea19582d": {
+    "id": "r_ea19582d",
+    "event_id": "evt_14e48dcb",
+    "question_id": "q_b87a7b5d",
+    "status": "WAITING",
+    "winner": null,
+    "created_at": 1788444708.7780578
+  },
+  "r_8530bf53": {
+    "id": "r_8530bf53",
+    "event_id": "evt_129d32f9",
+    "question_id": "q_0b192958",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_0cee7281",
+      "participant_name": "Alice",
+      "team_id": "team_439334",
+      "team_name": "Alpha",
+      "timestamp": "2026-09-03T14:13:55Z"
+    },
+    "created_at": 1788444827.1553762
+  },
+  "r_3500e6df": {
+    "id": "r_3500e6df",
+    "event_id": "evt_23113433",
+    "question_id": "q_b712c1d1",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_adaa9ce9",
+      "participant_name": "Alice",
+      "team_id": "team_647b17",
+      "team_name": "Alpha",
+      "timestamp": "2026-09-03T14:23:09Z"
+    },
+    "created_at": 1788445373.0688024
+  },
+  "r_b6841239": {
+    "id": "r_b6841239",
+    "event_id": "evt_e03e4d46",
+    "question_id": "q_476a5d08",
+    "status": "BUZZER_OPEN",
+    "winner": null,
+    "created_at": 1788449036.6495433
+  }
+}

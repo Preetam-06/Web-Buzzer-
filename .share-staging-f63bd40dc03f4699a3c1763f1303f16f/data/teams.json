@@ -1,0 +1,32 @@
+{
+  "team_53d538": {
+    "id": "team_53d538",
+    "event_id": "evt_14e48dcb",
+    "name": "Team A",
+    "score": 0
+  },
+  "team_16cdc0": {
+    "id": "team_16cdc0",
+    "event_id": "evt_14e48dcb",
+    "name": "Team B",
+    "score": 0
+  },
+  "team_b6c7a6": {
+    "id": "team_b6c7a6",
+    "event_id": "evt_e90efe9e",
+    "name": "T1",
+    "score": 0
+  },
+  "team_439334": {
+    "id": "team_439334",
+    "event_id": "evt_129d32f9",
+    "name": "Alpha",
+    "score": 10
+  },
+  "team_647b17": {
+    "id": "team_647b17",
+    "event_id": "evt_23113433",
+    "name": "Alpha",
+    "score": 10
+  }
+}

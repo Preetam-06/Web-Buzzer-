@@ -1,0 +1,29 @@
+{
+  "evt_abb32805": {
+    "id": "evt_abb32805",
+    "name": "hello",
+    "code": "HELLO007",
+    "max_participants": 50,
+    "status": "RUNNING",
+    "current_round_id": "r_ebd46353",
+    "current_question_id": "q_9a353ee7"
+  },
+  "evt_b60e7323": {
+    "id": "evt_b60e7323",
+    "name": "fxbxbx",
+    "code": "ZDVZDV",
+    "max_participants": 50,
+    "status": "CREATED",
+    "current_round_id": null,
+    "current_question_id": null
+  },
+  "evt_875e9504": {
+    "id": "evt_875e9504",
+    "name": "bhgj",
+    "code": "0001",
+    "max_participants": 50,
+    "status": "RUNNING",
+    "current_round_id": "r_22adf97c",
+    "current_question_id": "q_4eb0e666"
+  }
+}

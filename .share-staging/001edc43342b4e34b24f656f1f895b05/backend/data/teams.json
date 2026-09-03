@@ -1,0 +1,26 @@
+{
+  "team_5bf01d": {
+    "id": "team_5bf01d",
+    "event_id": "evt_abb32805",
+    "name": "team core",
+    "score": 0
+  },
+  "team_30808e": {
+    "id": "team_30808e",
+    "event_id": "evt_abb32805",
+    "name": "team java",
+    "score": 20
+  },
+  "team_3e5001": {
+    "id": "team_3e5001",
+    "event_id": "evt_875e9504",
+    "name": "team 1",
+    "score": 80
+  },
+  "team_bf2004": {
+    "id": "team_bf2004",
+    "event_id": "evt_875e9504",
+    "name": "team 2",
+    "score": 0
+  }
+}

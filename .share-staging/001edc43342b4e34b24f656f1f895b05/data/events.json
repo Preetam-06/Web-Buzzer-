@@ -1,0 +1,65 @@
+{
+  "evt_14e48dcb": {
+    "id": "evt_14e48dcb",
+    "name": "Test Event",
+    "code": "TEST26",
+    "max_participants": 50,
+    "status": "RUNNING",
+    "current_round_id": "r_ea19582d",
+    "current_question_id": "q_b87a7b5d"
+  },
+  "evt_e90efe9e": {
+    "id": "evt_e90efe9e",
+    "name": "Small Event",
+    "code": "SMALL1",
+    "max_participants": 1,
+    "status": "CREATED",
+    "current_round_id": null,
+    "current_question_id": null
+  },
+  "evt_129d32f9": {
+    "id": "evt_129d32f9",
+    "name": "WS Test",
+    "code": "WSB5F1",
+    "max_participants": 10,
+    "status": "RUNNING",
+    "current_round_id": "r_8530bf53",
+    "current_question_id": "q_0b192958"
+  },
+  "evt_23113433": {
+    "id": "evt_23113433",
+    "name": "WS Test",
+    "code": "WSE669",
+    "max_participants": 10,
+    "status": "RUNNING",
+    "current_round_id": "r_3500e6df",
+    "current_question_id": "q_b712c1d1"
+  },
+  "evt_e03e4d46": {
+    "id": "evt_e03e4d46",
+    "name": "5th",
+    "code": "HELLO",
+    "max_participants": 50,
+    "status": "RUNNING",
+    "current_round_id": "r_b6841239",
+    "current_question_id": "q_476a5d08"
+  },
+  "evt_2ab013e3": {
+    "id": "evt_2ab013e3",
+    "name": "QR Test",
+    "code": "QRTEST",
+    "max_participants": 50,
+    "status": "CREATED",
+    "current_round_id": null,
+    "current_question_id": null
+  },
+  "evt_f99c7f69": {
+    "id": "evt_f99c7f69",
+    "name": "IP Test",
+    "code": "IPTEST5273",
+    "max_participants": 50,
+    "status": "CREATED",
+    "current_round_id": null,
+    "current_question_id": null
+  }
+}

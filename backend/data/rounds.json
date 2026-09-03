@@ -1,0 +1,74 @@
+{
+  "r_6b172d8f": {
+    "id": "r_6b172d8f",
+    "event_id": "evt_abb32805",
+    "question_id": "q_2f5dbe70",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_69b2c8c9",
+      "participant_name": "Preetam",
+      "team_id": "team_5bf01d",
+      "team_name": "team core",
+      "timestamp": "2026-09-03T15:54:07Z"
+    },
+    "created_at": 1788450826.4711406
+  },
+  "r_b811cfbc": {
+    "id": "r_b811cfbc",
+    "event_id": "evt_abb32805",
+    "question_id": "q_b619fc6f",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_fee16644",
+      "participant_name": "Priti",
+      "team_id": "team_30808e",
+      "team_name": "team java",
+      "timestamp": "2026-09-03T15:54:56Z"
+    },
+    "created_at": 1788450887.6924455
+  },
+  "r_ebd46353": {
+    "id": "r_ebd46353",
+    "event_id": "evt_abb32805",
+    "question_id": "q_9a353ee7",
+    "status": "WAITING",
+    "winner": null,
+    "created_at": 1788450936.26026
+  },
+  "r_33d25e37": {
+    "id": "r_33d25e37",
+    "event_id": "evt_875e9504",
+    "question_id": "q_f914e4b3",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_53dd239c",
+      "participant_name": "Preetam",
+      "team_id": "team_3e5001",
+      "team_name": "team 1",
+      "timestamp": "2026-09-03T16:59:04Z"
+    },
+    "created_at": 1788454728.4824388
+  },
+  "r_13cc5e52": {
+    "id": "r_13cc5e52",
+    "event_id": "evt_875e9504",
+    "question_id": "q_266e222e",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_53dd239c",
+      "participant_name": "Preetam",
+      "team_id": "team_3e5001",
+      "team_name": "team 1",
+      "timestamp": "2026-09-03T16:59:23Z"
+    },
+    "created_at": 1788454760.1048727
+  },
+  "r_22adf97c": {
+    "id": "r_22adf97c",
+    "event_id": "evt_875e9504",
+    "question_id": "q_4eb0e666",
+    "status": "WAITING",
+    "winner": null,
+    "created_at": 1788454787.973026
+  }
+}
