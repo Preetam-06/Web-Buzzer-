@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Query
 from fastapi.responses import StreamingResponse
 import io, qrcode, socket, subprocess, re
+from config.settings import settings
 from storage import json_store
 
 router = APIRouter(tags=["qr"])
@@ -94,6 +95,13 @@ def get_lan_ip() -> str:
 
 def build_join_url(request: Request, code: str, base_url: str | None = None) -> str:
     """Build http://<LAN_IP>:<port>/join/<code> so QR works for all devices, not just localhost."""
+    # An explicitly configured public URL must win over the browser-provided
+    # URL so QR codes remain usable when the app is behind port forwarding or
+    # a reverse proxy.
+    if settings.PUBLIC_APP_URL:
+        configured_url = settings.PUBLIC_APP_URL.strip().rstrip("/")
+        if configured_url.startswith(("http://", "https://")):
+            return f"{configured_url}/join/{code}"
     # In Vite development the API is proxied through port 8000, while clients
     # must open the frontend on port 5173. The frontend supplies that origin.
     if base_url:

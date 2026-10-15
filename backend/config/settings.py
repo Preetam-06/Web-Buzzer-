@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     DATA_DIR: str = "data"
     CORS_ORIGINS: list = ["*"]
     HOST_LAN_IP: str = ""  # Set via env for Docker: real host LAN IP (e.g., 192.168.1.10) so QR uses host IP not container IP
+    PUBLIC_APP_URL: str = ""  # Optional external URL used for QR links, e.g. https://quiz.example.com
 
     class Config:
         env_file = ".env"
