@@ -2,101 +2,241 @@
   "team_6ffbe7": {
     "id": "team_6ffbe7",
     "event_id": "evt_c48cd096",
-    "name": "Blackwood"
+    "name": "TEAM_01"
   },
   "team_efe2f8": {
     "id": "team_efe2f8",
     "event_id": "evt_c48cd096",
-    "name": "Redline"
+    "name": "TEAM_02"
   },
   "team_e63ef2": {
     "id": "team_e63ef2",
     "event_id": "evt_c48cd096",
-    "name": "Ironclad"
+    "name": "TEAM_03"
   },
   "team_85c76d": {
     "id": "team_85c76d",
     "event_id": "evt_c48cd096",
-    "name": "Deadlock"
+    "name": "TEAM_04"
   },
   "team_c0b2ef": {
     "id": "team_c0b2ef",
     "event_id": "evt_c48cd096",
-    "name": "Nightfall"
+    "name": "TEAM_05"
   },
   "team_0974f7": {
     "id": "team_0974f7",
     "event_id": "evt_c48cd096",
-    "name": "Overdrive"
+    "name": "TEAM_06"
   },
   "team_386945": {
     "id": "team_386945",
     "event_id": "evt_c48cd096",
-    "name": "Outlier"
+    "name": "TEAM_07"
   },
   "team_79a8bb": {
     "id": "team_79a8bb",
     "event_id": "evt_c48cd096",
-    "name": "Darkhorse"
+    "name": "TEAM_08"
   },
   "team_09ad23": {
     "id": "team_09ad23",
     "event_id": "evt_c48cd096",
-    "name": "Blackout"
+    "name": "TEAM_09"
   },
   "team_04f0e4": {
     "id": "team_04f0e4",
     "event_id": "evt_c48cd096",
-    "name": "Vanguard"
+    "name": "TEAM_10"
   },
   "team_e2ee24": {
     "id": "team_e2ee24",
     "event_id": "evt_c48cd096",
-    "name": "Renegade"
+    "name": "TEAM_11"
   },
   "team_f8d403": {
     "id": "team_f8d403",
     "event_id": "evt_c48cd096",
-    "name": "Dominion"
+    "name": "TEAM_12"
   },
   "team_039dfc": {
     "id": "team_039dfc",
     "event_id": "evt_c48cd096",
-    "name": "Fortune"
+    "name": "TEAM_13"
   },
   "team_f39d36": {
     "id": "team_f39d36",
     "event_id": "evt_c48cd096",
-    "name": "Legacy"
+    "name": "TEAM_14"
   },
   "team_6459e0": {
     "id": "team_6459e0",
     "event_id": "evt_c48cd096",
-    "name": "Empire"
+    "name": "TEAM_15"
   },
   "team_36d3a1": {
     "id": "team_36d3a1",
     "event_id": "evt_c48cd096",
-    "name": "Reckoning"
+    "name": "TEAM_16"
+  },
+  "team_d096_17": {
+    "id": "team_d096_17",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_17"
+  },
+  "team_d096_18": {
+    "id": "team_d096_18",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_18"
+  },
+  "team_d096_19": {
+    "id": "team_d096_19",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_19"
+  },
+  "team_d096_20": {
+    "id": "team_d096_20",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_20"
+  },
+  "team_d096_21": {
+    "id": "team_d096_21",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_21"
+  },
+  "team_d096_22": {
+    "id": "team_d096_22",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_22"
+  },
+  "team_d096_23": {
+    "id": "team_d096_23",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_23"
+  },
+  "team_d096_24": {
+    "id": "team_d096_24",
+    "event_id": "evt_c48cd096",
+    "name": "TEAM_24"
   },
   "team_c188d0": {
     "id": "team_c188d0",
     "event_id": "evt_6625be43",
-    "name": "01."
+    "name": "TEAM_01"
   },
   "team_238f2d": {
     "id": "team_238f2d",
     "event_id": "evt_6625be43",
-    "name": "12."
+    "name": "TEAM_02"
   },
   "team_37d08e": {
     "id": "team_37d08e",
     "event_id": "evt_6625be43",
-    "name": "023."
+    "name": "TEAM_03"
   },
   "team_ac3890": {
     "id": "team_ac3890",
     "event_id": "evt_6625be43",
-    "name": "0.2"
+    "name": "TEAM_04"
+  },
+  "team_be43_05": {
+    "id": "team_be43_05",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_05"
+  },
+  "team_be43_06": {
+    "id": "team_be43_06",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_06"
+  },
+  "team_be43_07": {
+    "id": "team_be43_07",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_07"
+  },
+  "team_be43_08": {
+    "id": "team_be43_08",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_08"
+  },
+  "team_be43_09": {
+    "id": "team_be43_09",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_09"
+  },
+  "team_be43_10": {
+    "id": "team_be43_10",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_10"
+  },
+  "team_be43_11": {
+    "id": "team_be43_11",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_11"
+  },
+  "team_be43_12": {
+    "id": "team_be43_12",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_12"
+  },
+  "team_be43_13": {
+    "id": "team_be43_13",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_13"
+  },
+  "team_be43_14": {
+    "id": "team_be43_14",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_14"
+  },
+  "team_be43_15": {
+    "id": "team_be43_15",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_15"
+  },
+  "team_be43_16": {
+    "id": "team_be43_16",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_16"
+  },
+  "team_be43_17": {
+    "id": "team_be43_17",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_17"
+  },
+  "team_be43_18": {
+    "id": "team_be43_18",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_18"
+  },
+  "team_be43_19": {
+    "id": "team_be43_19",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_19"
+  },
+  "team_be43_20": {
+    "id": "team_be43_20",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_20"
+  },
+  "team_be43_21": {
+    "id": "team_be43_21",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_21"
+  },
+  "team_be43_22": {
+    "id": "team_be43_22",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_22"
+  },
+  "team_be43_23": {
+    "id": "team_be43_23",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_23"
+  },
+  "team_be43_24": {
+    "id": "team_be43_24",
+    "event_id": "evt_6625be43",
+    "name": "TEAM_24"
   }
 }

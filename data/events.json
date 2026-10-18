@@ -1,21 +1,24 @@
 {
   "evt_c48cd096": {
     "id": "evt_c48cd096",
-    "name": "Mocks1",
-    "code": "MOCK",
+    "name": "Main Event",
+    "code": "MAIN",
     "max_participants": 50,
     "status": "RUNNING",
     "current_round_id": "r_da079e05",
     "current_question_id": "q_38b9599f",
-    "que_over": false
+    "que_over": false,
+    "team_member_limit": 2
   },
   "evt_6625be43": {
     "id": "evt_6625be43",
-    "name": "test",
-    "code": "TEST",
+    "name": "Mock Event",
+    "code": "MOCK",
     "max_participants": 50,
-    "status": "CREATED",
-    "current_round_id": null,
-    "current_question_id": null
+    "status": "RUNNING",
+    "current_round_id": "r_9d935435",
+    "current_question_id": "q_683326f5",
+    "que_over": false,
+    "team_member_limit": 2
   }
 }

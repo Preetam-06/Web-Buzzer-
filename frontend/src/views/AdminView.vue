@@ -32,7 +32,10 @@
                 <div><label class="label">Event Name</label><input v-model="newEvent.name" class="input" placeholder="Faculty Trivia 2026"/></div>
                 <div><label class="label">Code (3-20, A-Z0-9_-)</label><input v-model="newEvent.code" class="input" placeholder="FACULTY26"/></div>
               </div>
-              <div><label class="label">Max Participants</label><input v-model.number="newEvent.max" type="number" class="input" /></div>
+              <div class="grid grid-2">
+                <div><label class="label">Max Participants</label><input v-model.number="newEvent.max" type="number" min="1" class="input" /></div>
+                <div><label class="label">Users per team</label><input v-model.number="newEvent.teamLimit" type="number" min="1" class="input" placeholder="Unlimited" /></div>
+              </div>
               <button class="btn btn-primary" @click="createEvent">Create Event</button>
               <div style="font-size:13px;color:var(--muted)">Or select existing:</div>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -50,7 +53,9 @@
               <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
                 <label class="label" style="align-self:center;margin:0">Max</label>
                 <input v-model.number="editMax" type="number" class="input" style="width:110px"/>
-                <button class="btn btn-ghost" @click="updateMax">Save limit</button>
+                <label class="label" style="align-self:center;margin:0">Users/team</label>
+                <input v-model.number="editTeamLimit" type="number" min="1" class="input" style="width:110px" placeholder="Unlimited"/>
+                <button class="btn btn-ghost" @click="updateLimits">Save limits</button>
                 <a :href="displayUrl" target="_blank" class="btn btn-ghost">Open Display ↗</a>
                 <a :href="joinUrl" target="_blank" class="btn btn-ghost">Join Link ↗</a>
               </div>
@@ -106,8 +111,8 @@
               <span class="badge badge-muted">{{ teams.length }}</span>
             </div>
             <form @submit.prevent="addTeam" style="display:flex;gap:8px;margin-bottom:12px">
-              <input v-model="newTeamName" class="input" placeholder="Team name" required />
-              <button class="btn btn-primary" type="submit">Add</button>
+              <button class="btn btn-primary" type="submit" :disabled="teams.length >= 24">Add next team</button>
+              <span style="font-size:12px;color:var(--muted);align-self:center">Fixed names: TEAM_01 to TEAM_24</span>
             </form>
             <div style="display:grid;gap:8px;max-height:340px;overflow:auto">
               <div v-for="t in teams" :key="t.id" style="display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.65);padding:10px 12px;background:linear-gradient(145deg,rgba(255,255,255,.6),rgba(147,203,214,.4));box-shadow:4px 4px 10px rgba(11,53,71,.15), -4px -4px 10px rgba(255,255,255,.6);gap:8px;flex-wrap:wrap">
@@ -116,7 +121,6 @@
                   <div style="font-size:12px;color:var(--muted)">{{ t.member_count }} members</div>
                 </div>
                 <div style="display:flex;gap:6px;flex-wrap:wrap">
-                  <button class="btn btn-ghost" style="padding:6px 10px;font-size:12px" @click="renameTeam(t)">Rename</button>
                   <button class="btn btn-ghost" style="padding:6px 10px;font-size:12px;color:var(--danger)" @click="deleteTeam(t)">Delete</button>
                 </div>
               </div>
@@ -197,13 +201,13 @@ function logout(){
 
 const events = ref([])
 const selectedEvent = ref(null)
-const newEvent = ref({ name:'', code:'', max:50 })
+const newEvent = ref({ name:'', code:'', max:50, teamLimit:2 })
 const editMax = ref(50)
+const editTeamLimit = ref(null)
 const teams = ref([])
 const participants = ref([])
 const questions = ref([])
 const roundState = ref({ buzzer_status:'WAITING' })
-const newTeamName = ref('')
 const newQ = ref({ text:'', optionsRaw:'' })
 const queOver = computed(()=> !!roundState.value.que_over)
 const totalQuestions = computed(()=> Number(roundState.value.total_questions||0))
@@ -250,9 +254,16 @@ async function loadEvents(){
 async function createEvent(){
   if(!newEvent.value.name || !newEvent.value.code){ alert('Fill name & code'); return }
   try{
-    const ev = await eventAPI.create({ name:newEvent.value.name, code:newEvent.value.code.toUpperCase(), max_participants: Number(newEvent.value.max)||50 })
+    const teamLimit = Number(newEvent.value.teamLimit)
+    const ev = await eventAPI.create({
+      name:newEvent.value.name,
+      code:newEvent.value.code.toUpperCase(),
+      max_participants: Number(newEvent.value.max)||50,
+      team_member_limit: teamLimit > 0 ? teamLimit : null
+    })
     selectedEvent.value = ev
     editMax.value = ev.max_participants
+    editTeamLimit.value = ev.team_member_limit
     await refreshAll()
     await fetchNetwork()
     loadEvents()
@@ -261,12 +272,17 @@ async function createEvent(){
 async function selectEvent(ev){
   selectedEvent.value = ev
   editMax.value = ev.max_participants
+  editTeamLimit.value = ev.team_member_limit
   await refreshAll()
   await fetchNetwork()
 }
-async function updateMax(){
+async function updateLimits(){
   try{
-    const ev = await eventAPI.update(selectedEvent.value.id, { max_participants: Number(editMax.value) })
+    const teamLimit = Number(editTeamLimit.value)
+    const ev = await eventAPI.update(selectedEvent.value.id, {
+      max_participants: Number(editMax.value),
+      team_member_limit: teamLimit > 0 ? teamLimit : null
+    })
     selectedEvent.value = ev
   }catch(e){ alert(e.response?.data?.detail || e.message) }
 }
@@ -284,17 +300,10 @@ async function refreshAll(){
 }
 
 async function addTeam(){
-  if(!newTeamName.value.trim()) return
-  await teamAPI.create(selectedEvent.value.id, newTeamName.value.trim())
-  newTeamName.value=''
-  refreshAll()
-}
-async function renameTeam(t){
-  const n = prompt('New team name', t.name)
-  if(n && n.trim()!==t.name){
-    await teamAPI.update(t.id, n.trim())
+  try{
+    await teamAPI.create(selectedEvent.value.id, '')
     refreshAll()
-  }
+  }catch(e){ alert(e.response?.data?.detail || e.message) }
 }
 async function deleteTeam(t){
   if(!confirm(`Delete ${t.name}?`)) return

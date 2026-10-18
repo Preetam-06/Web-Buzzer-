@@ -55,6 +55,14 @@ def join_event(event_code: str, payload: ParticipantJoin):
                 team_name=teams[p["team_id"]]["name"],
                 event_id=ev["id"]
             )
+    team_member_limit = ev.get("team_member_limit")
+    if team_member_limit is not None:
+        team_count = sum(
+            1 for p in participants.values()
+            if p["event_id"] == ev["id"] and p.get("team_id") == payload.team_id
+        )
+        if team_count >= team_member_limit:
+            raise HTTPException(status_code=400, detail="TEAM FULL")
     pid = "p_" + uuid.uuid4().hex[:8]
     sid = "sess_" + uuid.uuid4().hex[:12]
     p = {

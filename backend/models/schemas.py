@@ -21,10 +21,12 @@ class EventCreate(BaseModel):
     name: str
     code: str = Field(pattern=r"^[A-Za-z0-9_-]{3,20}$")
     max_participants: int = 50
+    team_member_limit: Optional[int] = Field(default=None, ge=1)
 
 class EventUpdate(BaseModel):
     name: Optional[str] = None
     max_participants: Optional[int] = None
+    team_member_limit: Optional[int] = Field(default=None, ge=1)
     status: Optional[EventStatus] = None
 
 class EventOut(BaseModel):
@@ -32,6 +34,7 @@ class EventOut(BaseModel):
     name: str
     code: str
     max_participants: int
+    team_member_limit: Optional[int] = None
     status: EventStatus
     current_round_id: Optional[str] = None
     current_question_id: Optional[str] = None

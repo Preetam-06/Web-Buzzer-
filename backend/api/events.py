@@ -24,6 +24,7 @@ def create_event(payload: EventCreate):
         "name": payload.name,
         "code": payload.code,
         "max_participants": payload.max_participants,
+        "team_member_limit": payload.team_member_limit,
         "status": EventStatus.CREATED.value,
         "current_round_id": None,
         "current_question_id": None,
@@ -59,6 +60,8 @@ def update_event(event_id: str, payload: EventUpdate):
         if payload.max_participants < 1:
             raise HTTPException(status_code=400, detail="Invalid limit")
         ev["max_participants"] = payload.max_participants
+    if payload.team_member_limit is not None:
+        ev["team_member_limit"] = payload.team_member_limit
     if payload.status is not None:
         ev["status"] = payload.status.value if hasattr(payload.status, 'value') else payload.status
     events[key] = ev
