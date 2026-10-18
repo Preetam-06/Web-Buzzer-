@@ -100,14 +100,20 @@ const buzzerHint = computed(()=>{
   return 'WAITING FOR HOST'
 })
 const isMeWinner = computed(()=> winner.value && winner.value.participant_id===participant.value?.id)
+let localAudioContext = null
 
-function playLocalBuzzerSound(){
+function prepareLocalWinnerSound(){
   const AudioContext = window.AudioContext || window.webkitAudioContext
   if(!AudioContext) return
-  const audioContext = new AudioContext()
-  const oscillator = audioContext.createOscillator()
-  const gain = audioContext.createGain()
-  const now = audioContext.currentTime
+  if(!localAudioContext) localAudioContext = new AudioContext()
+  localAudioContext.resume().catch(()=>{})
+}
+
+function playLocalWinnerSound(){
+  if(!localAudioContext) return
+  const oscillator = localAudioContext.createOscillator()
+  const gain = localAudioContext.createGain()
+  const now = localAudioContext.currentTime
 
   oscillator.type = 'square'
   oscillator.frequency.setValueAtTime(880, now)
@@ -116,10 +122,9 @@ function playLocalBuzzerSound(){
   gain.gain.exponentialRampToValueAtTime(0.18, now + 0.01)
   gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2)
   oscillator.connect(gain)
-  gain.connect(audioContext.destination)
+  gain.connect(localAudioContext.destination)
   oscillator.start(now)
   oscillator.stop(now + 0.2)
-  oscillator.addEventListener('ended', ()=> audioContext.close())
 }
 
 function leave(){
@@ -194,7 +199,7 @@ function handleMessage(msg){
 function doBuzz(){
   if(!canBuzz.value || buzzLoading.value) return
   buzzLoading.value = true
-  playLocalBuzzerSound()
+  prepareLocalWinnerSound()
   const payload = {
     type: 'BUZZ',
     participant_id: participant.value.id,
@@ -239,8 +244,12 @@ onMounted(async ()=>{
         if(msg.winner) winner.value = msg.winner
       }
       if(msg.type==='BUZZER_WINNER' && msg.winner){
-        if(navigator.vibrate && msg.winner.participant_id===participant.value.id) navigator.vibrate(120)
-        buzzResult.value = msg.winner.participant_id===participant.value.id ? {ok:true, msg:'You won the buzzer!'} : {ok:false, msg:`${msg.winner.participant_name} won`}
+        const isLocalWinner = msg.winner.participant_id===participant.value.id
+        if(isLocalWinner){
+          if(navigator.vibrate) navigator.vibrate(120)
+          playLocalWinnerSound()
+        }
+        buzzResult.value = isLocalWinner ? {ok:true, msg:'You won the buzzer!'} : {ok:false, msg:`${msg.winner.participant_name} won`}
       }
       handleMessage(msg)
     }
