@@ -100,31 +100,27 @@ const buzzerHint = computed(()=>{
   return 'WAITING FOR HOST'
 })
 const isMeWinner = computed(()=> winner.value && winner.value.participant_id===participant.value?.id)
-let localAudioContext = null
+let buzzerAudio = null
+let buzzerStopTimer = null
 
 function prepareLocalWinnerSound(){
-  const AudioContext = window.AudioContext || window.webkitAudioContext
-  if(!AudioContext) return
-  if(!localAudioContext) localAudioContext = new AudioContext()
-  localAudioContext.resume().catch(()=>{})
+  if(!buzzerAudio){
+    buzzerAudio = new Audio('/audio/buzzer.mp3')
+    buzzerAudio.preload = 'auto'
+    buzzerAudio.loop = true
+  }
 }
 
 function playLocalWinnerSound(){
-  if(!localAudioContext) return
-  const oscillator = localAudioContext.createOscillator()
-  const gain = localAudioContext.createGain()
-  const now = localAudioContext.currentTime
-
-  oscillator.type = 'square'
-  oscillator.frequency.setValueAtTime(880, now)
-  oscillator.frequency.exponentialRampToValueAtTime(220, now + 0.18)
-  gain.gain.setValueAtTime(0.0001, now)
-  gain.gain.exponentialRampToValueAtTime(0.18, now + 0.01)
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2)
-  oscillator.connect(gain)
-  gain.connect(localAudioContext.destination)
-  oscillator.start(now)
-  oscillator.stop(now + 0.2)
+  if(!buzzerAudio) return
+  if(buzzerStopTimer) clearTimeout(buzzerStopTimer)
+  buzzerAudio.currentTime = 0
+  buzzerAudio.play().catch(()=>{})
+  buzzerStopTimer = setTimeout(()=>{
+    buzzerAudio.pause()
+    buzzerAudio.currentTime = 0
+    buzzerStopTimer = null
+  }, 5000)
 }
 
 function leave(){
@@ -257,5 +253,10 @@ onMounted(async ()=>{
 })
 onBeforeUnmount(()=>{
   if(wsConn) wsConn.close()
+  if(buzzerStopTimer) clearTimeout(buzzerStopTimer)
+  if(buzzerAudio){
+    buzzerAudio.pause()
+    buzzerAudio.currentTime = 0
+  }
 })
 </script>
