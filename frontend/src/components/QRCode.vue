@@ -1,10 +1,10 @@
 <template>
   <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:12px">
-    <img v-if="qrSrc" :src="qrSrc" alt="QR" style="width:200px;height:200px;image-rendering:pixelated;border-radius:12px;border:1px solid var(--border)"/>
-    <div style="font-weight:700">{{ code }}</div>
-    <div style="font-size:13px;color:var(--muted);word-break:break-all;text-align:center">{{ joinUrl }}</div>
-    <div v-if="lanIp && lanIp!=='localhost'" style="font-size:11px;color:var(--success);font-weight:600">LAN IP: {{ lanIp }} — phones on same Wi-Fi can scan</div>
-    <div v-else-if="lanIp==='localhost'" style="font-size:11px;color:var(--warning);font-weight:600">⚠️ LAN IP not detected — connect the host to Wi-Fi and restart the app</div>
+    <img v-if="qrSrc" :src="qrSrc" alt="QR" style="width:200px;height:200px;image-rendering:pixelated;border-radius:18px;border:1px solid rgba(255,255,255,.8);background:#fff;padding:8px;box-shadow:6px 6px 16px rgba(11,53,71,.22), -6px -6px 16px rgba(255,255,255,.7)"/>
+    <div style="font-weight:800;color:#083344">{{ code }}</div>
+    <div style="font-size:13px;color:#3d6f80;word-break:break-all;text-align:center">{{ joinUrl }}</div>
+    <div v-if="lanIp && lanIp!=='localhost'" style="font-size:11px;color:#0a6d8a;font-weight:700">LAN IP: {{ lanIp }} — phones on same Wi-Fi can scan</div>
+    <div v-else-if="lanIp==='localhost'" style="font-size:11px;color:#8a4a00;font-weight:700">⚠️ LAN IP not detected — connect the host to Wi-Fi and restart the app</div>
     <a :href="joinUrl" target="_blank" class="btn btn-ghost" style="width:100%">Open Join Link</a>
     <button class="btn btn-ghost" style="width:100%;font-size:12px" @click="copyLink">📋 Copy Link</button>
   </div>

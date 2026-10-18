@@ -1,33 +1,56 @@
 # Faculty Trivia Buzzer
 
-The production Docker image builds the Vue frontend, runs the FastAPI backend,
-and serves the complete application on **one port: 8000**. No VS Code terminal,
-Node.js installation, or separate frontend container is required.
+The production Docker image contains the Vue frontend, FastAPI backend,
+WebSockets, and Redis in **one container**. The complete application is
+available on port `8000`. You do not need a separate frontend container, Redis
+container, Node.js installation, or frontend start command.
+
+`run_docker.bat` starts one container named `trivia_backend`.
 
 ## Run with Docker (Windows)
 
-1. Install and start Docker Desktop.
-2. Open PowerShell in the project directory:
+### First setup or after code/dependency changes
 
-   ```powershell
-   cd D:\Project\mcc_evnt
-   docker compose down
-   docker compose up --build -d
-   ```
-
-3. Check that both services are running:
-
-   ```powershell
-   docker compose ps
-   curl http://localhost:8000/api/health
-   ```
-
-4. Open the admin page at `http://localhost:8000/admin`.
-
-The first build may take a few minutes. To view logs or stop the application:
+Open Docker Desktop, then run these commands in PowerShell:
 
 ```powershell
+cd D:\Project\mcc_evnt
+docker compose down --remove-orphans
+docker compose build
+.\run_docker.bat
+docker compose ps
+curl http://localhost:8000/api/health
+```
+
+Open the admin page:
+
+```powershell
+start http://localhost:8000/admin
+```
+
+### Normal startup
+
+After the image has been built, run only:
+
+```powershell
+cd D:\Project\mcc_evnt
+.\run_docker.bat
+```
+
+Run this command again whenever the computer changes networks or its IP address
+changes. It refreshes the current IP without rebuilding the image.
+
+### Logs and stop commands
+
+```powershell
+cd D:\Project\mcc_evnt
 docker compose logs -f
+```
+
+In another PowerShell window, stop the app with:
+
+```powershell
+cd D:\Project\mcc_evnt
 docker compose down
 ```
 

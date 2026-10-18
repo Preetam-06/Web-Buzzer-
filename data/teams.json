@@ -1,32 +1,102 @@
 {
-  "team_53d538": {
-    "id": "team_53d538",
-    "event_id": "evt_14e48dcb",
-    "name": "Team A",
-    "score": 0
+  "team_6ffbe7": {
+    "id": "team_6ffbe7",
+    "event_id": "evt_c48cd096",
+    "name": "Blackwood"
   },
-  "team_16cdc0": {
-    "id": "team_16cdc0",
-    "event_id": "evt_14e48dcb",
-    "name": "Team B",
-    "score": 0
+  "team_efe2f8": {
+    "id": "team_efe2f8",
+    "event_id": "evt_c48cd096",
+    "name": "Redline"
   },
-  "team_b6c7a6": {
-    "id": "team_b6c7a6",
-    "event_id": "evt_e90efe9e",
-    "name": "T1",
-    "score": 0
+  "team_e63ef2": {
+    "id": "team_e63ef2",
+    "event_id": "evt_c48cd096",
+    "name": "Ironclad"
   },
-  "team_439334": {
-    "id": "team_439334",
-    "event_id": "evt_129d32f9",
-    "name": "Alpha",
-    "score": 10
+  "team_85c76d": {
+    "id": "team_85c76d",
+    "event_id": "evt_c48cd096",
+    "name": "Deadlock"
   },
-  "team_647b17": {
-    "id": "team_647b17",
-    "event_id": "evt_23113433",
-    "name": "Alpha",
-    "score": 10
+  "team_c0b2ef": {
+    "id": "team_c0b2ef",
+    "event_id": "evt_c48cd096",
+    "name": "Nightfall"
+  },
+  "team_0974f7": {
+    "id": "team_0974f7",
+    "event_id": "evt_c48cd096",
+    "name": "Overdrive"
+  },
+  "team_386945": {
+    "id": "team_386945",
+    "event_id": "evt_c48cd096",
+    "name": "Outlier"
+  },
+  "team_79a8bb": {
+    "id": "team_79a8bb",
+    "event_id": "evt_c48cd096",
+    "name": "Darkhorse"
+  },
+  "team_09ad23": {
+    "id": "team_09ad23",
+    "event_id": "evt_c48cd096",
+    "name": "Blackout"
+  },
+  "team_04f0e4": {
+    "id": "team_04f0e4",
+    "event_id": "evt_c48cd096",
+    "name": "Vanguard"
+  },
+  "team_e2ee24": {
+    "id": "team_e2ee24",
+    "event_id": "evt_c48cd096",
+    "name": "Renegade"
+  },
+  "team_f8d403": {
+    "id": "team_f8d403",
+    "event_id": "evt_c48cd096",
+    "name": "Dominion"
+  },
+  "team_039dfc": {
+    "id": "team_039dfc",
+    "event_id": "evt_c48cd096",
+    "name": "Fortune"
+  },
+  "team_f39d36": {
+    "id": "team_f39d36",
+    "event_id": "evt_c48cd096",
+    "name": "Legacy"
+  },
+  "team_6459e0": {
+    "id": "team_6459e0",
+    "event_id": "evt_c48cd096",
+    "name": "Empire"
+  },
+  "team_36d3a1": {
+    "id": "team_36d3a1",
+    "event_id": "evt_c48cd096",
+    "name": "Reckoning"
+  },
+  "team_c188d0": {
+    "id": "team_c188d0",
+    "event_id": "evt_6625be43",
+    "name": "01."
+  },
+  "team_238f2d": {
+    "id": "team_238f2d",
+    "event_id": "evt_6625be43",
+    "name": "12."
+  },
+  "team_37d08e": {
+    "id": "team_37d08e",
+    "event_id": "evt_6625be43",
+    "name": "023."
+  },
+  "team_ac3890": {
+    "id": "team_ac3890",
+    "event_id": "evt_6625be43",
+    "name": "0.2"
   }
 }

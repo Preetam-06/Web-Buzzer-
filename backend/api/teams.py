@@ -30,9 +30,10 @@ def create_team(event_id: str, payload: TeamCreate):
         raise HTTPException(status_code=404, detail="Event not found")
     tid = "team_" + uuid.uuid4().hex[:6]
     teams = _teams()
-    team = {"id": tid, "event_id": event_id, "name": payload.name.strip(), "score": 0}
-    if not team["name"]:
+    name = payload.name.strip()
+    if not name:
         raise HTTPException(status_code=400, detail="Team name required")
+    team = {"id": tid, "event_id": event_id, "name": name}
     teams[tid] = team
     _save_teams(teams)
     return {**team, "member_count": 0}
@@ -54,7 +55,7 @@ def list_teams(event_id: str):
     for t in teams.values():
         if t["event_id"] == event_id:
             cnt = sum(1 for p in participants.values() if p.get("team_id") == t["id"])
-            out.append({**t, "member_count": cnt})
+            out.append({"id": t["id"], "event_id": t["event_id"], "name": t["name"], "member_count": cnt})
     return out
 
 @router.put("/api/teams/{team_id}", response_model=TeamOut)
@@ -62,11 +63,15 @@ def update_team(team_id: str, payload: TeamUpdate):
     teams = _teams()
     if team_id not in teams:
         raise HTTPException(status_code=404, detail="Team not found")
-    teams[team_id]["name"] = payload.name.strip()
+    name = payload.name.strip()
+    if not name:
+        raise HTTPException(status_code=400, detail="Team name required")
+    teams[team_id]["name"] = name
     _save_teams(teams)
     participants = _participants()
     cnt = sum(1 for p in participants.values() if p.get("team_id") == team_id)
-    return {**teams[team_id], "member_count": cnt}
+    t = teams[team_id]
+    return {"id": t["id"], "event_id": t["event_id"], "name": t["name"], "member_count": cnt}
 
 @router.delete("/api/teams/{team_id}")
 def delete_team(team_id: str):

@@ -1,17 +1,4 @@
 services:
-  redis:
-    image: redis:7-alpine
-    container_name: trivia_redis
-    command: redis-server --appendonly yes
-    volumes:
-      - redis_data:/data
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 2s
-      retries: 5
-
   backend:
     build:
       context: .
@@ -20,15 +7,13 @@ services:
     ports:
       - "0.0.0.0:8000:8000"
     environment:
-      - REDIS_URL=redis://redis:6379/0
+      - REDIS_URL=redis://127.0.0.1:6379/0
       - DATA_DIR=/app/data
       - HOST_LAN_IP=${HOST_LAN_IP:-}
       - PUBLIC_APP_URL=${PUBLIC_APP_URL:-}
     volumes:
       - ./data:/app/data
-    depends_on:
-      redis:
-        condition: service_healthy
+      - redis_data:/app/redis-data
     restart: unless-stopped
 
 volumes:

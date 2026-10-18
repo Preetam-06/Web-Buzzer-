@@ -7,7 +7,9 @@ from storage import json_store
 router = APIRouter(tags=["qr"])
 
 def _ip_from_ipconfig() -> str | None:
-    """Parse ipconfig (Windows) offline — works even without internet, as long as adapter has IP."""
+    """Parse ipconfig (Windows) offline — works even without internet, as long as adapter has IP.
+    Skips virtual adapters (WSL/Docker/Hyper-V/VirtualBox/Bluetooth) so the real
+    Wi-Fi / hotspot / Ethernet IP wins even when the IP changes (DHCP)."""
     try:
         # ipconfig works offline, shows 192.168.0.x even without internet
         out = subprocess.check_output("ipconfig", text=True, encoding="utf-8", errors="ignore")
@@ -16,32 +18,50 @@ def _ip_from_ipconfig() -> str | None:
             out = subprocess.check_output("ipconfig", text=True, errors="ignore")
         except Exception:
             return None
-    # Find all IPv4 addresses
-    ips = re.findall(r"(\d+\.\d+\.\d+\.\d+)", out)
-    # Prefer 192.168.* (most common home router), then 10.*, then 172.16-31.*, exclude 127.* and 172.23.* (WSL)
+    virtual_markers = ("virtual", "vbox", "wsl", "docker", "hyper-v", "hyperv",
+                       "vethernet", "vmware", "bluetooth", "pseudo", "loopback", "tap-", "tun")
+    # Split into per-adapter blocks; the adapter title is the first line of each block.
+    blocks = re.split(r"\r?\n\s*\r?\n", out)
     candidates = []
-    for ip in ips:
-        if ip.startswith("127.") or ip == "0.0.0.0" or ip.startswith("255."):
+    for block in blocks:
+        lines = [ln.strip() for ln in block.strip().splitlines() if ln.strip()]
+        if not lines:
             continue
-        # WSL 172.23.* etc — deprioritize
-        if ip.startswith("172.23.") or ip.startswith("172.29."):
-            candidates.append((3, ip))
-        elif ip.startswith("192.168."):
-            candidates.append((0, ip))
-        elif ip.startswith("10."):
-            candidates.append((1, ip))
-        elif ip.startswith("172."):
-            # 172.16-31
-            try:
-                second = int(ip.split(".")[1])
-                if 16 <= second <= 31:
-                    candidates.append((2, ip))
-                else:
+        title = lines[0].lower()
+        if any(m in title for m in virtual_markers):
+            continue
+        if "media disconnected" in block.lower():
+            continue
+        ips = re.findall(r"(\d+\.\d+\.\d+\.\d+)", block)
+        for ip in ips:
+            if ip.startswith("127.") or ip == "0.0.0.0" or ip.startswith("255."):
+                continue
+            if ip.startswith("169.254."):
+                continue  # link-local, no DHCP — not routable for phones
+            # WSL 172.23.* etc — deprioritize
+            if ip.startswith("172.23.") or ip.startswith("172.29."):
+                candidates.append((3, ip))
+            elif ip.startswith("192.168.137."):
+                candidates.append((-1, ip))  # Windows hotspot host IP — top priority
+            elif ip.startswith("192.168."):
+                # Docker Desktop VM lives at 192.168.65.* — skip it
+                if ip.startswith("192.168.65."):
+                    continue
+                candidates.append((0, ip))
+            elif ip.startswith("10."):
+                candidates.append((1, ip))
+            elif ip.startswith("172."):
+                # 172.16-31
+                try:
+                    second = int(ip.split(".")[1])
+                    if 16 <= second <= 31:
+                        candidates.append((2, ip))
+                    else:
+                        candidates.append((4, ip))
+                except:
                     candidates.append((4, ip))
-            except:
-                candidates.append((4, ip))
-        else:
-            candidates.append((5, ip))
+            else:
+                candidates.append((5, ip))
     if candidates:
         candidates.sort(key=lambda x: x[0])
         return candidates[0][1]
@@ -157,11 +177,18 @@ def qr_url(event_id: str, request: Request, base_url: str | None = Query(None)):
 
 @router.get("/api/network-info")
 def network_info(request: Request):
-    lan = get_lan_ip()
     host_header = request.headers.get("host", "") if request else ""
+    host = host_header.rsplit(":", 1)[0] if ":" in host_header else host_header
+    host = host.strip().strip("[]")
     port = "8000"
     if host_header and ":" in host_header:
         port = host_header.rsplit(":", 1)[1]
+    # Most truthful answer: the address this very request arrived on.
+    # Survives DHCP/IP change with zero config — no env var needed.
+    if host and host not in ("localhost", "127.0.0.1", "::1") and not host.startswith("172."):
+        lan = host
+    else:
+        lan = get_lan_ip()
     return {
         "lan_ip": lan,
         "host_header": host_header,

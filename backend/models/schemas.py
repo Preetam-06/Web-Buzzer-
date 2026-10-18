@@ -46,7 +46,6 @@ class TeamOut(BaseModel):
     id: str
     event_id: str
     name: str
-    score: int = 0
     member_count: int = 0
 
 class ParticipantJoin(BaseModel):
@@ -88,15 +87,6 @@ class BuzzerRequest(BaseModel):
     participant_id: str
     session_id: str
     round_id: str
-
-class ScoreCorrectRequest(BaseModel):
-    points: int = 10
-
-class LeaderboardEntry(BaseModel):
-    team_id: str
-    team_name: str
-    score: int
-    rank: int
 
 class BuzzWinner(BaseModel):
     participant_id: str

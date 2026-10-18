@@ -4,7 +4,7 @@
     <div class="topbar">
       <div class="container" style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;gap:12px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:10px">
-          <span style="width:38px;height:38px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:900">⚡</span>
+          <span style="width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#62e9ff,#0a8fb0);color:#04293a;display:grid;place-items:center;font-weight:900;box-shadow:0 0 14px rgba(0,239,255,.6)">⚡</span>
           <div>
             <div style="font-weight:900;letter-spacing:-.02em">Faculty Trivia Buzzer — Admin</div>
             <div style="font-size:12px;color:var(--muted)">Desktop control • Responsive for tablet too</div>
@@ -54,11 +54,11 @@
                 <a :href="displayUrl" target="_blank" class="btn btn-ghost">Open Display ↗</a>
                 <a :href="joinUrl" target="_blank" class="btn btn-ghost">Join Link ↗</a>
               </div>
-              <div v-if="networkInfo.lan_ip && networkInfo.lan_ip!=='localhost'" style="margin-top:8px;background:#080909;border:1px solid var(--border);border-radius:10px;padding:8px 10px;font-size:12px">
-                <div style="font-weight:700;color:#166534">✓ Phones use: {{ joinUrl }}</div>
-                <div style="color:#475569">LAN IP: {{ networkInfo.lan_ip }}:{{ networkInfo.port }} — QR auto uses IP, not localhost</div>
+              <div v-if="networkInfo.lan_ip && networkInfo.lan_ip!=='localhost'" style="margin-top:8px;background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(169,219,227,.5));border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:8px 10px;font-size:12px">
+                <div style="font-weight:700;color:#0a6d8a">✓ Phones use: {{ joinUrl }}</div>
+                <div style="color:#3d6f80">LAN IP: {{ networkInfo.lan_ip }}:{{ networkInfo.port }} — QR auto uses IP, not localhost</div>
               </div>
-              <div v-else-if="networkInfo.lan_ip==='localhost'" style="margin-top:8px;background:#080909;border:1px solid var(--border);border-radius:10px;padding:8px 10px;font-size:12px;color:#f2eee6">⚠️ LAN IP not detected — QR shows localhost. Phones can't join localhost. Connect to Wi-Fi and restart backend.</div>
+              <div v-else-if="networkInfo.lan_ip==='localhost'" style="margin-top:8px;background:linear-gradient(145deg,#ffe6a8,#ffc46b);border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:8px 10px;font-size:12px;color:#4a2d00">⚠️ LAN IP not detected — QR shows localhost. Phones can't join localhost. Connect to Wi-Fi and restart backend.</div>
               <div style="margin-top:12px">
                 <QRCode :code="selectedEvent.code" :eventId="selectedEvent.id" />
               </div>
@@ -72,34 +72,28 @@
               <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <span class="badge" :class="buzzerBadge">{{ roundState.buzzer_status || 'WAITING' }}</span>
                 <span v-if="roundState.question" class="badge badge-muted">Q{{ roundState.question.number }}</span>
+                <span v-if="totalQuestions" class="badge badge-muted">Q {{ questionIndex }} / {{ totalQuestions }}</span>
+                <span v-if="queOver" class="badge badge-warning">QUE OVER</span>
                 <span v-if="roundState.winner" class="badge badge-success">Winner: {{ roundState.winner.participant_name }} ({{ roundState.winner.team_name }})</span>
               </div>
-              <div v-if="roundState.question" style="background:#080909;border:1px solid var(--border);border-radius:12px;padding:12px">
+              <div v-if="queOver" style="background:linear-gradient(145deg,#ffe6a8,#ffc46b);border:1px solid rgba(255,255,255,.7);padding:10px 12px;font-weight:800;color:#4a2d00">QUE OVER — all questions done. Use PREV to go back.</div>
+              <div v-if="roundState.question && !queOver" style="background:linear-gradient(145deg,#8abdc9,#c6edf3);border:1px solid rgba(255,255,255,.6);border-radius:16px;padding:12px;box-shadow:inset 5px 5px 12px rgba(11,53,71,.2), inset -5px -5px 12px rgba(255,255,255,.7)">
                 <div style="font-weight:700">{{ roundState.question.text }}</div>
                 <div v-if="roundState.question.options" style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
                   <span v-for="(o,i) in roundState.question.options" :key="i" class="badge badge-muted">{{ String.fromCharCode(65+i) }}: {{ o }}</span>
                 </div>
               </div>
-              <div v-else style="color:var(--muted);font-size:14px">No active question — click Start Question</div>
+              <div v-else-if="!queOver" style="color:var(--muted);font-size:14px">No active question — click Start Question</div>
               <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
                 <button class="btn btn-primary" @click="startQ">START QUESTION</button>
-                <button class="btn btn-primary" :disabled="roundState.buzzer_status==='BUZZER_OPEN'" @click="openBuzzer" style="background:#059669">OPEN BUZZER</button>
+                <button class="btn btn-primary" :disabled="roundState.buzzer_status==='BUZZER_OPEN' || queOver" @click="openBuzzer" style="background:linear-gradient(145deg,#5ff0d6,#00bfa0)">OPEN BUZZER</button>
                 <button class="btn btn-ghost" @click="resetBuzzer">RESET BUZZER</button>
-                <button class="btn btn-ghost" @click="nextQ">NEXT QUESTION →</button>
+                <button class="btn btn-ghost" :disabled="isFirst && !queOver" @click="prevQ">← PREV QUESTION</button>
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                <div>
-                  <label class="label">Correct points</label>
-                  <input v-model.number="correctPoints" class="input" type="number" step="1" />
-                </div>
-                <div>
-                  <label class="label">Wrong points</label>
-                  <input v-model.number="wrongPoints" class="input" type="number" step="1" />
-                </div>
-                <button class="btn btn-success" :disabled="!roundState.winner" @click="markCorrect">✓ CORRECT ({{ correctPoints >= 0 ? '+' : '' }}{{ correctPoints }})</button>
-                <button class="btn btn-danger" :disabled="!roundState.winner" @click="markWrong">✕ WRONG ({{ wrongPoints >= 0 ? '+' : '' }}{{ wrongPoints }})</button>
+              <div style="display:grid;grid-template-columns:1fr;gap:10px">
+                <button class="btn btn-ghost" :disabled="queOver" @click="nextQ">NEXT QUESTION →</button>
               </div>
-              <div style="font-size:12px;color:var(--muted)">Flow: Start Question → Open Buzzer → Judge → Next</div>
+              <div style="font-size:12px;color:var(--muted)">Flow: Start Question → Open Buzzer → Reset → Prev / Next</div>
             </div>
           </div>
         </div>
@@ -115,27 +109,18 @@
               <input v-model="newTeamName" class="input" placeholder="Team name" required />
               <button class="btn btn-primary" type="submit">Add</button>
             </form>
-            <div style="display:grid;gap:8px;max-height:320px;overflow:auto">
-              <div v-for="t in teams" :key="t.id" style="display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:12px;padding:10px 12px;background:#080909">
+            <div style="display:grid;gap:8px;max-height:340px;overflow:auto">
+              <div v-for="t in teams" :key="t.id" style="display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.65);padding:10px 12px;background:linear-gradient(145deg,rgba(255,255,255,.6),rgba(147,203,214,.4));box-shadow:4px 4px 10px rgba(11,53,71,.15), -4px -4px 10px rgba(255,255,255,.6);gap:8px;flex-wrap:wrap">
                 <div>
                   <div style="font-weight:700">{{ t.name }}</div>
-                  <div style="font-size:12px;color:var(--muted)">{{ t.member_count }} members • {{ t.score }} pts</div>
+                  <div style="font-size:12px;color:var(--muted)">{{ t.member_count }} members</div>
                 </div>
-                <div style="display:flex;gap:6px">
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
                   <button class="btn btn-ghost" style="padding:6px 10px;font-size:12px" @click="renameTeam(t)">Rename</button>
                   <button class="btn btn-ghost" style="padding:6px 10px;font-size:12px;color:var(--danger)" @click="deleteTeam(t)">Delete</button>
                 </div>
               </div>
-            </div>
-            <div style="margin-top:12px" class="card" v-if="leaderboard">
-              <div style="font-weight:700;margin-bottom:8px">Leaderboard</div>
-              <div v-for="row in leaderboard.teams" :key="row.team_id" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f1f5f9">
-                <span>{{ row.rank }}. {{ row.team_name }}</span><b>{{ row.score }}</b>
-              </div>
-              <div v-if="leaderboard.top_buzzers?.length" style="margin-top:10px">
-                <div style="font-weight:600;font-size:13px">Top Buzzers</div>
-                <div v-for="b in leaderboard.top_buzzers" :key="b.name" style="font-size:13px;color:var(--muted)">{{ b.name }} — {{ b.team }} — {{ b.wins }} wins</div>
-              </div>
+              <div v-if="teams.length===0" style="color:var(--muted);text-align:center;padding:16px">No teams yet</div>
             </div>
           </div>
 
@@ -146,7 +131,7 @@
               <span class="badge badge-success">{{ participants.length }}</span>
             </div>
             <div style="display:grid;gap:8px;max-height:420px;overflow:auto">
-              <div v-for="p in participants" :key="p.id" style="display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:12px;padding:10px 12px">
+              <div v-for="p in participants" :key="p.id" style="display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.65);border-radius:16px;padding:10px 12px;background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(147,203,214,.35))">
                 <div><div style="font-weight:600">{{ p.name }}</div><div style="font-size:12px;color:var(--muted)">{{ p.team_name }} • {{ p.id.slice(0,6) }}</div></div>
                 <span class="badge badge-muted">{{ p.team_name }}</span>
               </div>
@@ -163,11 +148,10 @@
             <form @submit.prevent="addQuestion" style="display:grid;gap:8px;margin-bottom:12px">
               <textarea v-model="newQ.text" class="input" placeholder="Question text" rows="2" required></textarea>
               <input v-model="newQ.optionsRaw" class="input" placeholder="Options comma separated (optional) — e.g. Earth,Mars,Jupiter"/>
-              <input v-model="newQ.correct" class="input" placeholder="Correct answer (optional)"/>
               <button class="btn btn-primary" type="submit">Add Question</button>
             </form>
             <div style="display:grid;gap:8px;max-height:360px;overflow:auto">
-              <div v-for="q in questions" :key="q.id" style="border:1px solid var(--border);border-radius:12px;padding:10px 12px;background:#080909">
+              <div v-for="q in questions" :key="q.id" style="border:1px solid rgba(255,255,255,.65);border-radius:16px;padding:10px 12px;background:linear-gradient(145deg,rgba(255,255,255,.6),rgba(147,203,214,.4))">
                 <div style="display:flex;justify-content:space-between;gap:8px">
                   <b>Q{{ q.number }}</b>
                   <span style="display:flex;gap:6px">
@@ -187,7 +171,7 @@
 </template>
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
-import { authAPI, eventAPI, teamAPI, questionAPI, participantAPI, roundAPI, scoreAPI } from '../services/api'
+import { authAPI, eventAPI, teamAPI, questionAPI, participantAPI, roundAPI } from '../services/api'
 import api from '../services/api'
 import QRCode from '../components/QRCode.vue'
 
@@ -219,11 +203,12 @@ const teams = ref([])
 const participants = ref([])
 const questions = ref([])
 const roundState = ref({ buzzer_status:'WAITING' })
-const leaderboard = ref(null)
 const newTeamName = ref('')
-const newQ = ref({ text:'', optionsRaw:'', correct:'' })
-const correctPoints = ref(10)
-const wrongPoints = ref(-10)
+const newQ = ref({ text:'', optionsRaw:'' })
+const queOver = computed(()=> !!roundState.value.que_over)
+const totalQuestions = computed(()=> Number(roundState.value.total_questions||0))
+const questionIndex = computed(()=> Number(roundState.value.question_index||0))
+const isFirst = computed(()=> roundState.value.is_first !== false && questionIndex.value <= 1)
 const participantCount = computed(()=> participants.value.length)
 
 const buzzerBadge = computed(()=>{
@@ -294,7 +279,6 @@ async function refreshAll(){
     try{ participants.value = await participantAPI.list(id) }catch{}
     try{ questions.value = await questionAPI.list(id) }catch{}
     try{ roundState.value = await roundAPI.state(id) }catch{}
-    try{ leaderboard.value = await scoreAPI.leaderboard(id) }catch{}
     try{ selectedEvent.value = await eventAPI.get(id) }catch{}
   }finally{ refreshInProgress=false }
 }
@@ -318,8 +302,8 @@ async function deleteTeam(t){
 }
 async function addQuestion(){
   const opts = newQ.value.optionsRaw ? newQ.value.optionsRaw.split(',').map(s=>s.trim()).filter(Boolean) : undefined
-  await questionAPI.create(selectedEvent.value.id, { text:newQ.value.text, options: opts, correct_answer: newQ.value.correct || undefined })
-  newQ.value = { text:'', optionsRaw:'', correct:'' }
+  await questionAPI.create(selectedEvent.value.id, { text:newQ.value.text, options: opts })
+  newQ.value = { text:'', optionsRaw:'' }
   refreshAll()
 }
 async function editQuestion(q){
@@ -333,24 +317,11 @@ async function removeQuestion(q){
   await questionAPI.del(q.id)
   refreshAll()
 }
-async function startQ(){ await roundAPI.start(selectedEvent.value.id); refreshAll() }
-async function openBuzzer(){ await roundAPI.open(selectedEvent.value.id); refreshAll() }
+async function startQ(){ try{ await roundAPI.start(selectedEvent.value.id) }catch(e){ if(e.response?.data?.detail!=='No more questions') alert(e.response?.data?.detail || e.message) } refreshAll() }
+async function openBuzzer(){ try{ await roundAPI.open(selectedEvent.value.id) }catch(e){ alert(e.response?.data?.detail || e.message) } refreshAll() }
 async function resetBuzzer(){ await roundAPI.reset(selectedEvent.value.id); refreshAll() }
-async function nextQ(){ try{ await roundAPI.next(selectedEvent.value.id); refreshAll() }catch(e){ alert(e.response?.data?.detail || e.message) } }
-async function markCorrect(){
-  try{
-    const r = await scoreAPI.correct(selectedEvent.value.id, Number(correctPoints.value) || 0)
-    if(r.team) teams.value = teams.value.map(t=> t.id===r.team.id ? {...t, score:r.team.score} : t)
-    await refreshAll()
-  }catch(e){ alert(e.response?.data?.detail || e.message) }
-}
-async function markWrong(){
-  try{
-    const r = await scoreAPI.wrong(selectedEvent.value.id, Number(wrongPoints.value) || 0)
-    if(r.team) teams.value = teams.value.map(t=> t.id===r.team.id ? {...t, score:r.team.score} : t)
-    await refreshAll()
-  }catch(e){ alert(e.response?.data?.detail || e.message) }
-}
+async function nextQ(){ try{ await roundAPI.next(selectedEvent.value.id) }catch(e){ if(e.response?.data?.detail!=='No more questions') alert(e.response?.data?.detail || e.message) } refreshAll() }
+async function prevQ(){ try{ await roundAPI.prev(selectedEvent.value.id); refreshAll() }catch(e){ alert(e.response?.data?.detail || e.message) } }
 
 onMounted(()=>{ if(isAuthed.value) loadEvents(); fetchNetwork() })
 watch(selectedEvent, (v)=>{

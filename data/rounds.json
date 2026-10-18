@@ -1,46 +1,392 @@
 {
-  "r_ea19582d": {
-    "id": "r_ea19582d",
-    "event_id": "evt_14e48dcb",
-    "question_id": "q_b87a7b5d",
+  "r_8b4d23dc": {
+    "id": "r_8b4d23dc",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_60401183",
     "status": "WAITING",
     "winner": null,
-    "created_at": 1788444708.7780578
+    "created_at": 1792220008.666706
   },
-  "r_8530bf53": {
-    "id": "r_8530bf53",
-    "event_id": "evt_129d32f9",
-    "question_id": "q_0b192958",
+  "r_d33919e0": {
+    "id": "r_d33919e0",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_96f6f8a0",
     "status": "COMPLETED",
-    "winner": {
-      "participant_id": "p_0cee7281",
-      "participant_name": "Alice",
-      "team_id": "team_439334",
-      "team_name": "Alpha",
-      "timestamp": "2026-09-03T14:13:55Z"
-    },
-    "created_at": 1788444827.1553762
-  },
-  "r_3500e6df": {
-    "id": "r_3500e6df",
-    "event_id": "evt_23113433",
-    "question_id": "q_b712c1d1",
-    "status": "COMPLETED",
-    "winner": {
-      "participant_id": "p_adaa9ce9",
-      "participant_name": "Alice",
-      "team_id": "team_647b17",
-      "team_name": "Alpha",
-      "timestamp": "2026-09-03T14:23:09Z"
-    },
-    "created_at": 1788445373.0688024
-  },
-  "r_b6841239": {
-    "id": "r_b6841239",
-    "event_id": "evt_e03e4d46",
-    "question_id": "q_476a5d08",
-    "status": "BUZZER_OPEN",
     "winner": null,
-    "created_at": 1788449036.6495433
+    "created_at": 1792226875.8281531
+  },
+  "r_fa6bd395": {
+    "id": "r_fa6bd395",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_60401183",
+    "status": "QUESTION_ACTIVE",
+    "winner": null,
+    "created_at": 1792226882.7335186
+  },
+  "r_c234d66e": {
+    "id": "r_c234d66e",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_96f6f8a0",
+    "status": "COMPLETED",
+    "winner": null,
+    "created_at": 1792226884.0521417
+  },
+  "r_da226c90": {
+    "id": "r_da226c90",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_60401183",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_700bdb73",
+      "participant_name": "Hatim",
+      "team_id": "team_09ad23",
+      "team_name": "Blackout",
+      "timestamp": "2026-10-17T08:48:23Z"
+    },
+    "created_at": 1792226886.5500946
+  },
+  "r_54f3782f": {
+    "id": "r_54f3782f",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_96f6f8a0",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_700bdb73",
+      "participant_name": "Hatim",
+      "team_id": "team_09ad23",
+      "team_name": "Blackout",
+      "timestamp": "2026-10-17T08:48:58Z"
+    },
+    "created_at": 1792226916.328968
+  },
+  "r_037816e6": {
+    "id": "r_037816e6",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_766b7d2a",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_e53b5a29",
+      "participant_name": "Siddhesh",
+      "team_id": "team_039dfc",
+      "team_name": "Fortune",
+      "timestamp": "2026-10-17T08:49:56Z"
+    },
+    "created_at": 1792226963.160526
+  },
+  "r_f3122b4d": {
+    "id": "r_f3122b4d",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_bbd92f62",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_14dc7af4",
+      "participant_name": "Sumit",
+      "team_id": "team_039dfc",
+      "team_name": "Fortune",
+      "timestamp": "2026-10-17T08:51:35Z"
+    },
+    "created_at": 1792227061.7864153
+  },
+  "r_3edcb129": {
+    "id": "r_3edcb129",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_43624749",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_dfbb0ab9",
+      "participant_name": "Vaidehi",
+      "team_id": "team_f39d36",
+      "team_name": "Legacy",
+      "timestamp": "2026-10-17T08:53:02Z"
+    },
+    "created_at": 1792227108.13007
+  },
+  "r_55268fdf": {
+    "id": "r_55268fdf",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_95c67311",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_080b3737",
+      "participant_name": "Omkar",
+      "team_id": "team_6ffbe7",
+      "team_name": "Blackwood",
+      "timestamp": "2026-10-17T08:54:45Z"
+    },
+    "created_at": 1792227250.6636784
+  },
+  "r_988c6390": {
+    "id": "r_988c6390",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_31e4bf95",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_700bdb73",
+      "participant_name": "Hatim",
+      "team_id": "team_09ad23",
+      "team_name": "Blackout",
+      "timestamp": "2026-10-17T08:55:57Z"
+    },
+    "created_at": 1792227317.9248347
+  },
+  "r_e93410d7": {
+    "id": "r_e93410d7",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_a9ba2e80",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_53d6b3e7",
+      "participant_name": "Tanmayee",
+      "team_id": "team_6459e0",
+      "team_name": "Empire",
+      "timestamp": "2026-10-17T08:57:59Z"
+    },
+    "created_at": 1792227377.1390777
+  },
+  "r_adb7d85f": {
+    "id": "r_adb7d85f",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_ea107230",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_e53b5a29",
+      "participant_name": "Siddhesh",
+      "team_id": "team_039dfc",
+      "team_name": "Fortune",
+      "timestamp": "2026-10-17T08:58:28Z"
+    },
+    "created_at": 1792227489.4164476
+  },
+  "r_fb9f6328": {
+    "id": "r_fb9f6328",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_bdbf44da",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_700bdb73",
+      "participant_name": "Hatim",
+      "team_id": "team_09ad23",
+      "team_name": "Blackout",
+      "timestamp": "2026-10-17T08:59:13Z"
+    },
+    "created_at": 1792227522.433834
+  },
+  "r_79959e8a": {
+    "id": "r_79959e8a",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_aedf4e38",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_7b14aaec",
+      "participant_name": "Riya",
+      "team_id": "team_85c76d",
+      "team_name": "Deadlock",
+      "timestamp": "2026-10-17T08:59:53Z"
+    },
+    "created_at": 1792227568.4965963
+  },
+  "r_8c0ba7f5": {
+    "id": "r_8c0ba7f5",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_d9aee9c9",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_ceb38c7f",
+      "participant_name": "Jayesh Wani",
+      "team_id": "team_04f0e4",
+      "team_name": "Vanguard",
+      "timestamp": "2026-10-17T09:00:39Z"
+    },
+    "created_at": 1792227606.446124
+  },
+  "r_8dbd0539": {
+    "id": "r_8dbd0539",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_b352b03b",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_7b14aaec",
+      "participant_name": "Riya",
+      "team_id": "team_85c76d",
+      "team_name": "Deadlock",
+      "timestamp": "2026-10-17T09:01:15Z"
+    },
+    "created_at": 1792227653.766511
+  },
+  "r_043ef4a4": {
+    "id": "r_043ef4a4",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_7b195e37",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_14dc7af4",
+      "participant_name": "Sumit",
+      "team_id": "team_039dfc",
+      "team_name": "Fortune",
+      "timestamp": "2026-10-17T09:01:59Z"
+    },
+    "created_at": 1792227695.37953
+  },
+  "r_a0e8a34a": {
+    "id": "r_a0e8a34a",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_751913a4",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_080b3737",
+      "participant_name": "Omkar",
+      "team_id": "team_6ffbe7",
+      "team_name": "Blackwood",
+      "timestamp": "2026-10-17T09:02:54Z"
+    },
+    "created_at": 1792227761.7791803
+  },
+  "r_22658178": {
+    "id": "r_22658178",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_a9422587",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_e53b5a29",
+      "participant_name": "Siddhesh",
+      "team_id": "team_039dfc",
+      "team_name": "Fortune",
+      "timestamp": "2026-10-17T09:03:32Z"
+    },
+    "created_at": 1792227781.0636952
+  },
+  "r_29802119": {
+    "id": "r_29802119",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_a5ab9499",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_a8bce9d8",
+      "participant_name": "Ajay dick",
+      "team_id": "team_c0b2ef",
+      "team_name": "Nightfall",
+      "timestamp": "2026-10-17T09:04:02Z"
+    },
+    "created_at": 1792227828.6998818
+  },
+  "r_cabbfd1a": {
+    "id": "r_cabbfd1a",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_be401de1",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_7b14aaec",
+      "participant_name": "Riya",
+      "team_id": "team_85c76d",
+      "team_name": "Deadlock",
+      "timestamp": "2026-10-17T09:05:03Z"
+    },
+    "created_at": 1792227887.5065484
+  },
+  "r_3cc192ff": {
+    "id": "r_3cc192ff",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_57759876",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_a8bce9d8",
+      "participant_name": "Ajay dick",
+      "team_id": "team_c0b2ef",
+      "team_name": "Nightfall",
+      "timestamp": "2026-10-17T09:05:47Z"
+    },
+    "created_at": 1792227920.2098172
+  },
+  "r_96ce1f8f": {
+    "id": "r_96ce1f8f",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_481b41ac",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_ceb38c7f",
+      "participant_name": "Jayesh Wani",
+      "team_id": "team_04f0e4",
+      "team_name": "Vanguard",
+      "timestamp": "2026-10-17T09:06:21Z"
+    },
+    "created_at": 1792227965.9137886
+  },
+  "r_e3b427ea": {
+    "id": "r_e3b427ea",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_4179753f",
+    "status": "COMPLETED",
+    "winner": null,
+    "created_at": 1792227997.9538336
+  },
+  "r_d9b666a6": {
+    "id": "r_d9b666a6",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_481b41ac",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_ceb38c7f",
+      "participant_name": "Jayesh Wani",
+      "team_id": "team_04f0e4",
+      "team_name": "Vanguard",
+      "timestamp": "2026-10-17T09:07:45Z"
+    },
+    "created_at": 1792228005.7271075
+  },
+  "r_49f1a731": {
+    "id": "r_49f1a731",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_4179753f",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_53d6b3e7",
+      "participant_name": "Tanmayee",
+      "team_id": "team_6459e0",
+      "team_name": "Empire",
+      "timestamp": "2026-10-17T09:09:27Z"
+    },
+    "created_at": 1792228086.2217014
+  },
+  "r_fdb293d8": {
+    "id": "r_fdb293d8",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_58ac0f98",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_a8bce9d8",
+      "participant_name": "Ajay dick",
+      "team_id": "team_c0b2ef",
+      "team_name": "Nightfall",
+      "timestamp": "2026-10-17T09:10:32Z"
+    },
+    "created_at": 1792228218.0021524
+  },
+  "r_8d219aae": {
+    "id": "r_8d219aae",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_4ada7090",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_7b14aaec",
+      "participant_name": "Riya",
+      "team_id": "team_85c76d",
+      "team_name": "Deadlock",
+      "timestamp": "2026-10-17T09:11:36Z"
+    },
+    "created_at": 1792228256.5067258
+  },
+  "r_da079e05": {
+    "id": "r_da079e05",
+    "event_id": "evt_c48cd096",
+    "question_id": "q_38b9599f",
+    "status": "BUZZER_LOCKED",
+    "winner": {
+      "participant_id": "p_53d6b3e7",
+      "participant_name": "Tanmayee",
+      "team_id": "team_6459e0",
+      "team_name": "Empire",
+      "timestamp": "2026-10-17T09:17:58Z"
+    },
+    "created_at": 1792228302.6729352
   }
 }

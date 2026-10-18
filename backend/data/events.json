@@ -5,8 +5,9 @@
     "code": "HELLO007",
     "max_participants": 50,
     "status": "RUNNING",
-    "current_round_id": "r_ebd46353",
-    "current_question_id": "q_9a353ee7"
+    "current_round_id": "r_05029d92",
+    "current_question_id": "q_5906e7a7",
+    "que_over": false
   },
   "evt_b60e7323": {
     "id": "evt_b60e7323",

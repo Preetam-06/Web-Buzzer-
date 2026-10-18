@@ -2,7 +2,7 @@
   <div class="join-page" style="min-height:100vh;display:flex;flex-direction:column">
     <div class="topbar" style="padding:14px 0">
       <div class="container" style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-weight:800;display:flex;gap:8px;align-items:center"><span style="background:var(--primary);color:#fff;width:34px;height:34px;border-radius:10px;display:grid;place-items:center">⚡</span> Faculty Buzzer</div>
+        <div style="font-weight:800;display:flex;gap:8px;align-items:center;color:#083344"><span style="background:linear-gradient(145deg,#62e9ff,#0a8fb0);color:#04293a;width:36px;height:36px;border-radius:12px;display:grid;place-items:center;box-shadow:0 0 14px rgba(0,239,255,.55)">⚡</span> Faculty Buzzer</div>
         <div class="badge badge-muted">{{ code }}</div>
       </div>
     </div>
@@ -40,7 +40,7 @@
             </div>
           </div>
 
-          <div v-if="error" style="background:#080909;color:#f2eee6;padding:10px 12px;border:1px solid var(--border);font-size:14px">{{ error }}</div>
+          <div v-if="error" style="background:linear-gradient(145deg,#ffd6db,#ffb3bb);color:#6b1020;padding:10px 12px;border:1px solid rgba(255,255,255,.6);border-radius:14px;font-size:14px;font-weight:600">{{ error }}</div>
 
           <button class="btn btn-primary btn-lg" :disabled="!name.trim() || !teamId || joining" type="submit">
             {{ joining ? 'Joining...' : 'Join Event' }}

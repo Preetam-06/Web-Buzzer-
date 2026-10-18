@@ -43,10 +43,6 @@ export const roundAPI = {
   open: (eventId)=> api.post(`/api/events/${eventId}/round/open-buzzer`).then(r=>r.data),
   reset: (eventId)=> api.post(`/api/events/${eventId}/round/reset`).then(r=>r.data),
   next: (eventId)=> api.post(`/api/events/${eventId}/round/next`).then(r=>r.data),
+  prev: (eventId)=> api.post(`/api/events/${eventId}/round/prev`).then(r=>r.data),
   state: (eventId)=> api.get(`/api/events/${eventId}/round/state`).then(r=>r.data),
-}
-export const scoreAPI = {
-  correct: (eventId,points=10)=> api.post(`/api/events/${eventId}/score/correct`,{points}).then(r=>r.data),
-  wrong: (eventId,points=-10)=> api.post(`/api/events/${eventId}/score/wrong`,{points}).then(r=>r.data),
-  leaderboard: (eventId)=> api.get(`/api/events/${eventId}/leaderboard`).then(r=>r.data),
 }

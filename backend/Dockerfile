@@ -10,6 +10,11 @@ RUN npm run build
 FROM python:3.11-slim
 WORKDIR /app
 
+# Run Redis in the same container as the application for a single-container deployment.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends redis-server \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install backend deps
 COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -17,15 +22,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code and data
 COPY backend/ ./backend/
 COPY data/ ./data/
+RUN sed -i 's/\r$//' /app/backend/docker-entrypoint.sh \
+    && chmod +x /app/backend/docker-entrypoint.sh
 
 # Copy built frontend from stage 1
 COPY --from=frontend-build /app/frontend/dist ./frontend/dist
 
 # Ensure data dir exists and is writable
-RUN mkdir -p /app/data
+RUN mkdir -p /app/data /app/redis-data
 
 WORKDIR /app/backend
 EXPOSE 8000
-ENV REDIS_URL=redis://redis:6379/0
+ENV REDIS_URL=redis://127.0.0.1:6379/0
 ENV DATA_DIR=/app/data
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/bin/sh", "/app/backend/docker-entrypoint.sh"]

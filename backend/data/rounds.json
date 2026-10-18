@@ -70,5 +70,49 @@
     "status": "WAITING",
     "winner": null,
     "created_at": 1788454787.973026
+  },
+  "r_add301d0": {
+    "id": "r_add301d0",
+    "event_id": "evt_abb32805",
+    "question_id": "q_ade4d328",
+    "status": "COMPLETED",
+    "winner": null,
+    "created_at": 1792004132.3631854
+  },
+  "r_652a0702": {
+    "id": "r_652a0702",
+    "event_id": "evt_abb32805",
+    "question_id": "q_5906e7a7",
+    "status": "COMPLETED",
+    "winner": {
+      "participant_id": "p_97fced8d",
+      "participant_name": "Preetam",
+      "team_id": "team_7323aa",
+      "team_name": "twafa",
+      "timestamp": "2026-10-14T19:10:01Z"
+    },
+    "created_at": 1792004227.6620684
+  },
+  "r_4bbc1017": {
+    "id": "r_4bbc1017",
+    "event_id": "evt_abb32805",
+    "question_id": "q_ade4d328",
+    "status": "QUESTION_ACTIVE",
+    "winner": null,
+    "created_at": 1792007703.5420015
+  },
+  "r_05029d92": {
+    "id": "r_05029d92",
+    "event_id": "evt_abb32805",
+    "question_id": "q_5906e7a7",
+    "status": "BUZZER_LOCKED",
+    "winner": {
+      "participant_id": "p_72966653",
+      "participant_name": "tuhedrh",
+      "team_id": "team_5bf01d",
+      "team_name": "team core",
+      "timestamp": "2026-10-14T19:55:11Z"
+    },
+    "created_at": 1792007705.3579051
   }
 }

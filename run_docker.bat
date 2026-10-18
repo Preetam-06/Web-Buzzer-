@@ -1,16 +1,20 @@
 @echo off
 echo ==========================================
 echo Faculty Trivia Buzzer - ONE COMMAND DOCKER
-echo Builds frontend + backend + redis
+echo Runs the frontend + backend + redis in one container
 echo Single URL: http://localhost:8000
 echo QR will use LAN IP (not localhost) so phones can join
 echo ==========================================
-echo Detecting LAN IP for QR...
+echo Detecting LAN IP for QR (skips virtual adapters, survives IP change on re-run)...
 set LAN_IP=
-for /f "tokens=2 delims=:" %%a in ('ipconfig ^| findstr /c:"IPv4 Address"') do (
-  for /f "tokens=1" %%i in ("%%a") do (
-    set LAN_IP=%%i
-    goto :found_ip
+for /f "usebackq delims=" %%i in (`powershell -noprofile -command "Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.IPAddress -notlike '127.*' -and $_.IPAddress -notlike '169.254.*' -and $_.InterfaceAlias -notmatch 'vEthernet|WSL|Docker|Hyper-V|VirtualBox|VMware|Bluetooth|Loopback|vBox|Virtual' } | Sort-Object { if ($_.IPAddress -like '192.168.137.*') {0} elseif ($_.IPAddress -like '192.168.*') {1} elseif ($_.IPAddress -like '10.*') {2} else {3} } | Select-Object -First 1 -ExpandProperty IPAddress" 2^>nul`) do set LAN_IP=%%i
+if "%LAN_IP%"=="" (
+  echo PowerShell detect failed, falling back to ipconfig...
+  for /f "tokens=2 delims=:" %%a in ('ipconfig ^| findstr /c:"IPv4 Address"') do (
+    for /f "tokens=1" %%i in ("%%a") do (
+      set LAN_IP=%%i
+      goto :found_ip
+    )
   )
 )
 :found_ip
@@ -38,13 +42,13 @@ if %errorlevel% neq 0 (
     exit /b 1
   ) else (
     echo Using docker-compose...
-    echo Starting all services (frontend build happens inside Docker)...
-    docker-compose up --build -d
+    echo Starting all services with the detected IP...
+    docker-compose up -d --force-recreate
     goto :done
   )
 )
-echo Starting all services (frontend build happens inside Docker)...
-docker compose up --build -d
+echo Starting all services with the detected IP...
+docker compose up -d --force-recreate
 :done
 if %errorlevel% neq 0 (
   echo Build/Start failed. Check errors above.
@@ -53,7 +57,7 @@ if %errorlevel% neq 0 (
 )
 echo.
 echo ==========================================
-echo SUCCESS! All running in Docker
+echo SUCCESS! Frontend, backend, and Redis running in one container
 echo ==========================================
 echo Admin:    http://localhost:8000/admin  (admin / admin123)
 echo Admin via LAN IP: http://%LAN_IP%:8000/admin  (use this for correct QR)

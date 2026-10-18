@@ -3,7 +3,7 @@
     "id": "team_5bf01d",
     "event_id": "evt_abb32805",
     "name": "team core",
-    "score": 0
+    "score": 60
   },
   "team_30808e": {
     "id": "team_30808e",
@@ -22,5 +22,11 @@
     "event_id": "evt_875e9504",
     "name": "team 2",
     "score": 0
+  },
+  "team_7323aa": {
+    "id": "team_7323aa",
+    "event_id": "evt_abb32805",
+    "name": "twafa",
+    "score": 40
   }
 }

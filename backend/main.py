@@ -8,7 +8,7 @@ from config.settings import settings
 from storage import json_store
 from websocket.manager import manager
 from redis_state.buzzer import get_round_status, try_claim_winner, set_round_status, get_winner, clear_round
-from api import auth, events, teams, participants, questions, rounds, scores, qr
+from api import auth, events, teams, participants, questions, rounds, qr
 
 app = FastAPI(title="Faculty Trivia Buzzer", version="1.0.0")
 
@@ -26,7 +26,6 @@ app.include_router(teams.router)
 app.include_router(participants.router)
 app.include_router(questions.router)
 app.include_router(rounds.router)
-app.include_router(scores.router)
 app.include_router(qr.router)
 
 @app.on_event("startup")
