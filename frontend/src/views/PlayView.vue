@@ -101,6 +101,27 @@ const buzzerHint = computed(()=>{
 })
 const isMeWinner = computed(()=> winner.value && winner.value.participant_id===participant.value?.id)
 
+function playLocalBuzzerSound(){
+  const AudioContext = window.AudioContext || window.webkitAudioContext
+  if(!AudioContext) return
+  const audioContext = new AudioContext()
+  const oscillator = audioContext.createOscillator()
+  const gain = audioContext.createGain()
+  const now = audioContext.currentTime
+
+  oscillator.type = 'square'
+  oscillator.frequency.setValueAtTime(880, now)
+  oscillator.frequency.exponentialRampToValueAtTime(220, now + 0.18)
+  gain.gain.setValueAtTime(0.0001, now)
+  gain.gain.exponentialRampToValueAtTime(0.18, now + 0.01)
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2)
+  oscillator.connect(gain)
+  gain.connect(audioContext.destination)
+  oscillator.start(now)
+  oscillator.stop(now + 0.2)
+  oscillator.addEventListener('ended', ()=> audioContext.close())
+}
+
 function leave(){
   store.clearParticipant()
   if(wsConn) wsConn.close()
@@ -173,6 +194,7 @@ function handleMessage(msg){
 function doBuzz(){
   if(!canBuzz.value || buzzLoading.value) return
   buzzLoading.value = true
+  playLocalBuzzerSound()
   const payload = {
     type: 'BUZZ',
     participant_id: participant.value.id,
